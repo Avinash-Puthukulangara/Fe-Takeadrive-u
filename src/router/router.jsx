@@ -11,13 +11,14 @@ export const router = createBrowserRouter([
       errorElement: <Errorpage />,
       children: [
         {
-            path: "",
-            element: <Signuppage />
+          path: "",
+          element: <Homepage />
         },
         {
-            path: "home",
-            element: <Homepage />
-        }
+            path: "/sign-up",
+            element: <Signuppage />
+        },
+
       ],
     },
     

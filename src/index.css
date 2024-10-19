@@ -7,3 +7,19 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+/* Define light mode (default) styles */
+:root {
+  --font-color: black; /* Light mode font color */
+}
+
+/* Define dark mode styles */
+[data-theme="dark"] {
+  --font-color: rgb(255, 255, 255); /* Dark mode font color */
+}
+
+/* Apply the font color to the entire body or other elements */
+body {
+  color: var(--font-color); /* Use the CSS variable */
+  transition: color 0.5s ease; /* Smooth transition between modes */
+}

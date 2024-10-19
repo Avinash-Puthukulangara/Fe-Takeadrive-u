@@ -1,7 +1,7 @@
 
 import React from 'react'
-import { Header } from '../components/user/Header'
 import { Outlet } from 'react-router-dom'
+import { Header } from '../components/user/Header'
 
 export const Userlayout = () => {
   return (
