@@ -15,13 +15,16 @@ export const Signuppage = () => {
   const { register, handleSubmit } = useForm()
   const navigate = useNavigate()
 
+  const handleLogin = () => {
+    navigate('/login')
+  }
+
   const user = {
     signup_route: "/user/signup"
   }
 
   const onSubmit = async (data) => {
     try {
-      console.log(data)
       const formData = new FormData();
 
       formData.append("name", data.name)
@@ -180,7 +183,7 @@ export const Signuppage = () => {
           </div>
           <div className="text-left">
             <p className="font-semibold">
-              Existing User? Then<a className="hover:underline"> Signin</a>
+              Existing User? Then<a className="hover:underline" onClick={handleLogin}> Signin</a>
             </p>
           </div>
           <button className="btn btn-wide bg-slate-600 bg-opacity-50">
