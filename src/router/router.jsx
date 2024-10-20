@@ -3,6 +3,8 @@ import { Userlayout } from "../layout/Userlayout";
 import { Errorpage } from "../pages/user/Errorpage";
 import { Signuppage } from "../pages/user/Signuppage";
 import { Homepage } from "../pages/user/Homepage";
+import { DatePlace } from "../pages/user/DatePlace";
+import { Loginpage } from "../pages/user/Loginpage";
 
 export const router = createBrowserRouter([
     {
@@ -15,9 +17,17 @@ export const router = createBrowserRouter([
           element: <Homepage />
         },
         {
-            path: "/sign-up",
+            path: "signup",
             element: <Signuppage />
         },
+        {
+            path: "login",
+            element: <Loginpage />
+        },
+        {
+          path: "filter",
+          element: <DatePlace />
+        }
 
       ],
     },
