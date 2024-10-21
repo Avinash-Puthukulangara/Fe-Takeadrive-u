@@ -52,7 +52,7 @@ export const Signuppage = () => {
       })
 
       console.log(response, "---response---")
-      navigate('/filter')
+      navigate('/user/filter')
 
     }catch(error) {
       console.log(error.message)

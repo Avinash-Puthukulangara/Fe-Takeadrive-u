@@ -1,10 +1,24 @@
-
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Header } from '../components/user/Header'
-import { WorkFlow } from '../components/user/WorkFlow'
+import { axiosInstance } from '../config/axiosInstance'
 
 export const Userlayout = () => {
+
+  const location = useLocation()
+
+  const checkUser = async() => {
+    try {
+      const response = await axiosInstance({method: "GET", url: "/user/checkuser",withCredentials: true})
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(() =>{ 
+    checkUser()
+  },[location.pathname])
+
   return (
     <div>
         <Header />

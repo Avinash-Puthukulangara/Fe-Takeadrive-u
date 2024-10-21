@@ -5,15 +5,16 @@ import { Signuppage } from "../pages/user/Signuppage";
 import { Homepage } from "../pages/user/Homepage";
 import { DatePlace } from "../pages/user/DatePlace";
 import { Loginpage } from "../pages/user/Loginpage";
+import { Protectedroute } from "./Protectedroute";
 
 export const router = createBrowserRouter([
     {
-      path: "/",
+      path: "",
       element: <Userlayout />,
       errorElement: <Errorpage />,
       children: [
         {
-          path: "",
+          path: "/",
           element: <Homepage />
         },
         {
@@ -24,9 +25,22 @@ export const router = createBrowserRouter([
             path: "login",
             element: <Loginpage />
         },
+
         {
-          path: "filter",
-          element: <DatePlace />
+              path: "user",
+              element: <Protectedroute />,
+              children: [
+                {
+                  path: "filter",
+                  element: <DatePlace />
+                },
+                {
+                  path: "userprofile"
+                },
+                {
+                  path: "mybookings"
+                }
+              ]
         }
 
       ],
