@@ -10,7 +10,6 @@ export const Userlayout = () => {
   const checkUser = async() => {
     try {
       const response = await axiosInstance({method: "GET", url: "/user/checkuser",withCredentials: true})
-      console.log(response)
     } catch (error) {
       console.log(error)
     }

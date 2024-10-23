@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { DarkMode } from './DarkMode';
 import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false); 
   const navigate = useNavigate();
+  const menuRef = useRef(null);
 
   const handleClick = () => {
     navigate('/signup');
@@ -17,6 +18,19 @@ export const Header = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   }
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false); 
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside); 
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside); 
+    };
+  },[]);
 
   return (
     <div className='sticky top-0 z-50'>
@@ -44,7 +58,7 @@ export const Header = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="md:hidden shadow-md w-62 h-0 absolute right-0">
+        <div ref={menuRef} className="md:hidden shadow-md w-62 h-0 absolute right-0">
           <ul className="menu bg-slate-100 bg-opacity-30 rounded-b-2xl p-4 items-center">
             <li><button className="btn btn-ghost w-full" onClick={handleHome}>Home</button></li>
             <li><button className="btn btn-ghost w-full">About Us</button></li>

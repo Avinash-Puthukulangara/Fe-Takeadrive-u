@@ -5,7 +5,9 @@ import { Signuppage } from "../pages/user/Signuppage";
 import { Homepage } from "../pages/user/Homepage";
 import { DatePlace } from "../pages/user/DatePlace";
 import { Loginpage } from "../pages/user/Loginpage";
-import { Protectedroute } from "./Protectedroute";
+import { ProtectedRoute } from "./Protectedroute";
+
+
 
 export const router = createBrowserRouter([
     {
@@ -28,10 +30,10 @@ export const router = createBrowserRouter([
 
         {
               path: "user",
-              element: <Protectedroute />,
+              element: <ProtectedRoute />,
               children: [
                 {
-                  path: "filter",
+                  path: "dateplace",
                   element: <DatePlace />
                 },
                 {

@@ -29,12 +29,11 @@ export const Loginpage = () => {
                 method: "POST",
                 url: user.login_route,
                 data,
-                withCredentials: true,
+                 withCredentials: true
             });
             
-            console.log(response, "====response");
             toast.success("Logged in successfully")
-            navigate("/user/filter");
+            navigate("/user/dateplace");
         } catch (error) {
             toast.error("Failed to Login")
             console.log(error);
