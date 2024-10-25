@@ -1,34 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveUser, clearUser } from '../redux/features/userSlice'; 
 import { axiosInstance } from '../config/axiosInstance';
 
 export const ProtectedRoute = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(null); 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userAuthorised = useSelector((state) => state.user.userAuthorised);  
 
   useEffect(() => {
     const checkUser = async () => {
       try {
         const response = await axiosInstance.get('/user/checkuser', { withCredentials: true });
+        
         if (response.data.success) {
-          setIsAuthenticated(true);
+          dispatch(saveUser(response.data.data));  
         } else {
-          setIsAuthenticated(false);
+          dispatch(clearUser()); 
           navigate('/login');
         }
       } catch (error) {
         console.error('Error occurred while checking user:', error);
-        setIsAuthenticated(false);
+        dispatch(clearUser());  
         navigate('/login');
       }
     };
 
-    checkUser();
-  }, [navigate]);
+    if (!userAuthorised) {
+      checkUser();  
+    }
+  }, [userAuthorised, navigate, dispatch]);
 
-  if (isAuthenticated === null) {
-    return <div>Loading...</div>; 
-  }
 
-  return isAuthenticated ? <Outlet /> : null; 
+  return userAuthorised ? <Outlet /> : null; 
 };

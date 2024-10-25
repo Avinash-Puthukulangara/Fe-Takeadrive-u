@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { axiosInstance } from '../../config/axiosInstance'
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 export const Loginpage = () => {
     const [passwordVisible, setPasswordVisible] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
   
     const togglePasswordVisibility = () => {
       setPasswordVisible(!passwordVisible)
@@ -24,19 +25,23 @@ export const Loginpage = () => {
     }
     
     const onSubmit = async (data) => {
+          setIsLoading(true)
         try {
+           await new Promise(resolve => setTimeout(resolve, 900))
             const response = await axiosInstance({
                 method: "POST",
                 url: user.login_route,
                 data,
                  withCredentials: true
             });
-            
+
             toast.success("Logged in successfully")
             navigate("/user/dateplace");
         } catch (error) {
             toast.error("Failed to Login")
             console.log(error);
+        } finally {
+            setIsLoading(false)
         }
     };
   return (
@@ -104,20 +109,9 @@ export const Loginpage = () => {
               New User? Then<a className="hover:underline" onClick={handleSignup}> Signin</a>
             </p>
           </div>
-          <button className="btn btn-wide bg-slate-600 bg-opacity-50">
-            Log In
+          <button className="btn btn-wide bg-slate-600 bg-opacity-50" disabled={isLoading}>
+            {isLoading ? (<span className="loading loading-dots loading-md"></span>) : ("Login")}
           </button>
-          <ToastContainer
-                 position="bottom-right"
-                 autoClose={5000}
-                 hideProgressBar={false}
-                 newestOnTop={false}
-                 closeOnClick
-                 rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="colored"/>
         </form>
       </div>
       
