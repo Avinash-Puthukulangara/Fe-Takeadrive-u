@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { axiosInstance } from '../../config/axiosInstance'
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import { SearchContext } from '../../components/user/SearchContext';
 
 export const Loginpage = () => {
     const [passwordVisible, setPasswordVisible] = useState(false)
     const [isLoading, setIsLoading] = useState(false);
+    const { setCars, setShowSearch } = useContext(SearchContext);
   
     const togglePasswordVisibility = () => {
       setPasswordVisible(!passwordVisible)
@@ -34,8 +36,9 @@ export const Loginpage = () => {
                 data,
                  withCredentials: true
             });
-
             toast.success("Logged in successfully")
+            setCars([])
+            setShowSearch(true)
             navigate("/user/dateplace");
         } catch (error) {
             toast.error("Failed to Login")

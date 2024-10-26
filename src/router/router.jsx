@@ -3,10 +3,14 @@ import { Userlayout } from "../layout/Userlayout";
 import { Errorpage } from "../pages/user/Errorpage";
 import { Signuppage } from "../pages/user/Signuppage";
 import { Homepage } from "../pages/user/Homepage";
-import { DatePlace } from "../pages/user/DatePlace";
+
 import { Loginpage } from "../pages/user/Loginpage";
 import { ProtectedRoute } from "./Protectedroute";
 import { CarList } from "../pages/user/CarList";
+
+import { SearchProvider } from "../components/user/SearchContext";
+import { DatePlace } from "../components/user/DatePlace";
+import { MyProfile } from "../pages/user/MyProfile";
 
 
 
@@ -26,7 +30,9 @@ export const router = createBrowserRouter([
         },
         {
             path: "login",
-            element: <Loginpage />
+            element: (
+             <SearchProvider><Loginpage /></SearchProvider>
+          )
         },
 
         {
@@ -35,14 +41,19 @@ export const router = createBrowserRouter([
               children: [
                 {
                   path: "dateplace",
-                  element: <DatePlace />
+                  element: (
+                    <SearchProvider><DatePlace /></SearchProvider>
+                  )
                 },
                 {
                   path: "carlist",
-                  element: <CarList />
+                  element:(
+                    <SearchProvider><CarList /></SearchProvider>
+                  ) 
                 },
                 {
-                  path: "mybookings"
+                  path: "myprofile",
+                  element: <MyProfile />
                 }
               ]
         }

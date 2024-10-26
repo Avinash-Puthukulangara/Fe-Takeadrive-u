@@ -21,7 +21,7 @@ export const DarkMode = () => {
   return (
     <div>
       <button className="btn btn-ghost btn-md" onClick={toggleMode}>
-        {isDarkMode ? 'LightTheme' : 'DarkTheme'}
+        {isDarkMode ? 'Light Theme' : 'Dark Theme'}
       </button>
     </div>
   )

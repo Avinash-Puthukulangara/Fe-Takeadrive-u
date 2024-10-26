@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -8,9 +8,12 @@ import { axiosInstance } from '../../config/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
+import { SearchContext } from './SearchContext';
 
 
-export const DatePlace = () => {
+export const DatePlace = ({  }) => {
+
+  const {setCars, setShowSearch} = useContext(SearchContext);
 
   const [selectedCity, setSelectedOption] = useState('Select City');
   const [selectedPickup, setSelectedPickup] = useState('Select Pickup');
@@ -21,6 +24,7 @@ export const DatePlace = () => {
   const { handleSubmit } = useForm();
   const navigate = useNavigate();
   const currentDate = dayjs();
+
 
   const cityOptions = {
     SelectCity: ['Select Pickup','Select Dropoff'],
@@ -69,24 +73,27 @@ export const DatePlace = () => {
   const onSubmit = async (data) => {
     if (!validateDates()) return;
     setIsLoading(true)
+
     try {
       await new Promise(resolve => setTimeout(resolve, 900))
 
-      const data = {
-        startdate: pickupDate ? pickupDate.toISOString() : null,
-        enddate: dropoffDate ? dropoffDate.toISOString() : null,
-        pickuplocation: selectedPickup,
-        dropofflocation: selectedDropoff
-      }
-
-
       const response = await axiosInstance({
-          method: "POST",
-          url: user.dateplace_route,
-          data: data,   
+        method: 'POST',
+        url: '/car/availablecars', 
+        data: {
+          startdate: pickupDate ? pickupDate.toISOString() : null,
+          enddate: dropoffDate ? dropoffDate.toISOString() : null,
+          pickuplocation: selectedPickup,
+          dropofflocation: selectedDropoff,
+        },
       });
-      console.log(response, "==responseee")
+      const carsData = response.data.allCarsdata;
+      console.log('Received car data:',carsData);
+      setCars(carsData)
+      localStorage.setItem('cars', JSON.stringify(carsData));
+      setShowSearch(false);
       navigate("/user/carlist");
+
     } catch (error) {
       console.log(error);
     } finally {
