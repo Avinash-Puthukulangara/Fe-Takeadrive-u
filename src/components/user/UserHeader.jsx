@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
 import { DarkMode } from './DarkMode';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { axiosInstance } from '../../config/axiosInstance';
 import { SearchContext } from './SearchContext';  
@@ -19,6 +19,7 @@ export const UserHeader = () => {
   const { setCars } = useContext(SearchContext)
 
   const navigate = useNavigate();
+  const location = useLocation();
   const menuRef = useRef(null);
 
   const handleHome = () => {
@@ -100,7 +101,7 @@ export const UserHeader = () => {
   return (
     <div className='sticky top-0 z-50'>
       <div className="navbar bg-lightgray bg-opacity-30 shadow-2xl flex justify-between items-center">
-        <button className="btn btn-ghost btn-circle" onClick={toggleMenu}>
+        <button className="btn btn-ghost btn-circle" onClick={location.pathname === '/carlist' ? toggleMenu : undefined}>
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
           </svg>
@@ -115,7 +116,7 @@ export const UserHeader = () => {
         </div>
       </div>
 
-      {isMenuOpen && (
+      {isMenuOpen && location.pathname === '/user/carlist'(
         <div ref={menuRef} className="absolute left-0 mt-2">
           <div className="fixed inset-y-0 left-0 z-30 w-64 bg-gray-800 text-white transform transition-transform duration-200 ease-in-out">
             <div className="flex items-center justify-between p-4">
