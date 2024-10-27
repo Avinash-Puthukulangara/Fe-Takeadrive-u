@@ -2,11 +2,13 @@ import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { axiosInstance } from '../../config/axiosInstance'
 import { useNavigate } from 'react-router-dom'
+import { SearchContext } from '../../components/user/SearchContext';
 import { toast } from 'react-toastify';
 
 export const Signuppage = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [isLoading, setIsLoading] = useState(false);
+  const { setCars, setShowSearch } = useContext(SearchContext);
   const [lcfrontpic, setLcfrontpic] = useState(null) 
   const [lcbackpic, setLcbackpic] = useState(null)
 
@@ -28,7 +30,7 @@ export const Signuppage = () => {
   const onSubmit = async (data) => {
     setIsLoading(true)
     try {
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 900));
       const formData = new FormData();
 
       formData.append("name", data.name)
@@ -54,7 +56,9 @@ export const Signuppage = () => {
         data: formData,
         headers: { 'Content-Type':'multipart/form-data' }
       })
-      toast.success("User signned up successfully")
+      toast.success("User signed up successfully")
+      setCars([])
+      setShowSearch(true)
       navigate("/user/dateplace");
     } catch(error) {
       toast.error("Failed to Sign up")

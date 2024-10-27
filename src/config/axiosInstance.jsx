@@ -4,6 +4,6 @@ import React from "react";
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const axiosInstance = axios.create({
-    baseURL: `${API_URL}/api`,
+    baseURL: "be-takeadrive-production.up.railway.app/api",
     withCredentials: true
 })
