@@ -28,7 +28,7 @@ export const Signuppage = () => {
   const onSubmit = async (data) => {
     setIsLoading(true)
     try {
-      await new Promise(resolve => setTimeout(resolve, 900));
+      await new Promise(resolve => setTimeout(resolve, 500));
       const formData = new FormData();
 
       formData.append("name", data.name)
