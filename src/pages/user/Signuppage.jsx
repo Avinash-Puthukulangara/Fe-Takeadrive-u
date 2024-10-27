@@ -54,7 +54,7 @@ export const Signuppage = () => {
         data: formData,
         headers: { 'Content-Type':'multipart/form-data' }
       })
-      toast.success("User signed up successfully")
+      toast.success("User signned up successfully")
       navigate("/user/dateplace");
     } catch(error) {
       toast.error("Failed to Sign up")
