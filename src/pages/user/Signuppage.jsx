@@ -47,8 +47,8 @@ export const Signuppage = () => {
       }
 
       for (let pair of formData.entries()) {
-        console.log(pair[0], pair[1])
-      }
+        console.log(pair[0], pair[1]);
+    }
 
       console.log(axiosInstance)
       const response = await axiosInstance({
@@ -57,13 +57,20 @@ export const Signuppage = () => {
         data: formData,
         headers: { 'Content-Type':'multipart/form-data' }
       })
+
       toast.success("User signed up successfully")
       setCars([])
       setShowSearch(true)
       navigate("/user/dateplace");
+
     } catch(error) {
-      toast.error("Failed to Sign up")
-      console.log(error.message)
+      if (error.response) {
+        console.error("Error data:", error.response.data);
+        console.error("Error status:", error.response.status);
+    } else {
+        console.error("Error message:", error.message);
+    }
+    toast.error("Failed to Sign up");
     } finally {
       setIsLoading(false)
     }
