@@ -50,6 +50,7 @@ export const Signuppage = () => {
         console.log(pair[0], pair[1])
       }
 
+      console.log(axiosInstance)
       const response = await axiosInstance({
         method: "POST",
         url: user.signup_route,
