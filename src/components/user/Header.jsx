@@ -6,6 +6,7 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false); 
   const navigate = useNavigate();
   const menuRef = useRef(null);
+  const aboutUsRef = useRef(null);
 
   const handleClick = () => {
     navigate('/signup');
@@ -18,6 +19,12 @@ export const Header = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   }
+
+  const handleAboutUs = () => {
+    if (aboutUsRef.current) {
+      aboutUsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -41,7 +48,7 @@ export const Header = () => {
 
         <div className="hidden md:flex flex-none items-center">
           <button className="btn btn-ghost btn-sm" onClick={handleHome}>Home</button>
-          <button className="btn btn-ghost btn-sm">About Us</button>
+          <button className="btn btn-ghost btn-sm" onClick={handleAboutUs}>About Us</button>
           <button className="btn btn-ghost btn-md" onClick={handleClick}>Sign Up</button>
           <div className="flex">
             <DarkMode />

@@ -17,7 +17,10 @@ export const MyProfile = () => {
 
   useEffect(() => {
     const fetchUserProfile = async () => {
-      const token = Cookies.get('token');
+      const allCookies = Cookies.get(); // Get all cookies for debugging
+    console.log('All Cookies:', allCookies); // Log all cookies
+    const token = Cookies.get('token');
+    console.log('Fetched Token:', token);
       if (!token) {
         setError("No authentication token found.");
         setLoading(false);

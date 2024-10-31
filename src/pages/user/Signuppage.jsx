@@ -58,6 +58,9 @@ export const Signuppage = () => {
         headers: { 'Content-Type':'multipart/form-data' }
       })
 
+      const token = response.data.token;
+      Cookies.set('token', token, { expires: 2 }); 
+
       toast.success("User signed up successfully")
       setCars([])
       setShowSearch(true)

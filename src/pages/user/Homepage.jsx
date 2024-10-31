@@ -1,6 +1,8 @@
 import React from 'react'
 import { WorkFlow } from '../../components/user/WorkFlow'
 import { useNavigate } from 'react-router-dom'
+import { Aboutus } from './Aboutus'
+
 
 export const Homepage = () => {
   const navigate = useNavigate()
@@ -36,6 +38,7 @@ export const Homepage = () => {
         </div>
       </div>
       <WorkFlow />
+      <Aboutus />
     </div>
   )
 }

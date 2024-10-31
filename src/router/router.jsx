@@ -12,8 +12,6 @@ import { SearchProvider } from "../components/user/SearchContext";
 import { DatePlace } from "../components/user/DatePlace";
 import { MyProfile } from "../pages/user/MyProfile";
 
-
-
 export const router = createBrowserRouter([
     {
       path: "",
