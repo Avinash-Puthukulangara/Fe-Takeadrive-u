@@ -87,11 +87,13 @@ export const DatePlace = ({  }) => {
           dropofflocation: selectedDropoff,
         },
       });
+
       const carsData = response.data.allCarsdata;
-      console.log('Received car data:',carsData);
+      console.log(carsData)
       setCars(carsData)
       localStorage.setItem('cars', JSON.stringify(carsData));
       setShowSearch(false);
+      
       navigate("/user/carlist");
 
     } catch (error) {

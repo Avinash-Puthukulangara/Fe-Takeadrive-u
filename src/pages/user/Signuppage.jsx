@@ -203,7 +203,7 @@ export const Signuppage = () => {
           </div>
           <div className="text-left">
             <p className="font-semibold">
-              Existing User? Then<a className="hover:underline" onClick={handleLogin}> Signin</a>
+              Existing User? Then<a className="hover:underline" onClick={handleLogin}> Login</a>
             </p>
           </div>
           <button className="btn btn-wide bg-slate-600 bg-opacity-50" disabled={isLoading}>

@@ -11,6 +11,7 @@ import { CarList } from "../pages/user/CarList";
 import { SearchProvider } from "../components/user/SearchContext";
 import { DatePlace } from "../components/user/DatePlace";
 import { MyProfile } from "../pages/user/MyProfile";
+import { BookCar } from "../pages/user/BookCar";
 
 export const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
                   element:(
                     <SearchProvider><CarList /></SearchProvider>
                   ) 
+                },
+                {
+                  path: "bookcar/:carId",
+                  element: <BookCar />
                 },
                 {
                   path: "myprofile",

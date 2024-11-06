@@ -116,7 +116,7 @@ export const Loginpage = () => {
             </div>
           <div className="text-left">
             <p className="font-semibold">
-              New User? Then<a className="hover:underline" onClick={handleSignup}> Signin</a>
+              New User? Then<a className="hover:underline" onClick={handleSignup}> Signup</a>
             </p>
           </div>
           <button className="btn btn-wide bg-slate-600 bg-opacity-50" disabled={isLoading}>

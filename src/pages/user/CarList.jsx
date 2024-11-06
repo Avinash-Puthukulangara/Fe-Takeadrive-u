@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { DatePlace } from '../../components/user/DatePlace';
 import { SearchContext } from '../../components/user/SearchContext';
+import { useNavigate } from 'react-router-dom';
 
 export const CarList = () => {
   const { cars, setCars, showSearch, setShowSearch } = useContext(SearchContext)
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedCars = JSON.parse(localStorage.getItem('cars') || '[]');
@@ -41,7 +43,7 @@ export const CarList = () => {
                   <p>Transmission: {car.transmissiontype}</p>
                   <p>Rent: ₹{car.rentalcharge ?? "Not available"}</p>
                   <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Book Car</button>
+                    <button className="btn btn-primary" onClick={()=> navigate(`/user/bookcar/${car._id}`)}>Book Car</button>
                   </div>
                 </div>
               </div>
