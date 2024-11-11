@@ -26,6 +26,7 @@ export const MyProfile = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       const token = Cookies.get('token')
+      Cookies.set('token', token)
       if (!token) {
         setError('No authentication token found.')
         setLoading(false)
@@ -85,7 +86,7 @@ export const MyProfile = () => {
         data: formData,
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
+          // 'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
       })
@@ -132,14 +133,14 @@ export const MyProfile = () => {
 
   return (
     <div className="hero bg-base-500 min-h-screen md:p-6">
-      <div className="card bg-teal-400 shadow-2xl mx-auto flex flex-col p-6 md:w-full sm:w-96">
+      <div className="card bg-teal-400 shadow-2xl mx-auto flex flex-col p-6 ">
         <h2 className="text-2xl font-bold font-serif ml-4">My Profile</h2>
         <div className="flex w-full flex-col">
           <div className="divider divider-error -mt-1"></div>
         </div>
         {userProfile ? (
-          <div className="flex flex-col md:flex-row">
-            <div className="flex flex-col items-center md:w-1/2 mb-4">
+          <div className="flex flex-col md:flex-row sm:flex-col">
+            <div className="flex flex-col items-center md:w-1/2 sm:w-full mb-4">
               <div className="avatar flex sm:justify-center items-center mb-4">
                 <div className="w-24 rounded-xl">
                   <figure>
@@ -156,9 +157,14 @@ export const MyProfile = () => {
                   </figure>
                 </div>
               </div>
-              <input type="file" name="userpic" onChange={handleFileChange} />
+              <input
+                type="file"
+                name="userpic"
+                onChange={handleFileChange}
+                className="mt-2 sm:w-full"
+              />
             </div>
-            <div className="flex flex-col md:w-1/2 md:mt-0 -ml-32 p-5">
+            <div className="flex flex-col md:w-1/2 sm:w-full sm:mt-4 md:mt-0 md:ml-6 sm:px-4">
               <div className="mb-4">
                 <label className="input input-bordered flex items-center gap-2 w-full">
                   Name:
@@ -207,7 +213,7 @@ export const MyProfile = () => {
                   />
                 </label>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-col sm:flex-row">
                 <button
                   className="btn btn-ghost btn-md bg-teal-300 border-1 border-black"
                   onClick={updateProfile}

@@ -12,6 +12,9 @@ import { SearchProvider } from "../components/user/SearchContext";
 import { DatePlace } from "../components/user/DatePlace";
 import { MyProfile } from "../pages/user/MyProfile";
 import { BookCar } from "../pages/user/BookCar";
+import PaymentSuccess from "../components/user/PaymentSuccess";
+import PaymentCanceled from "../components/user/PaymentCancel";
+import { MyBookings } from "../pages/user/MyBookings";
 
 export const router = createBrowserRouter([
     {
@@ -58,6 +61,18 @@ export const router = createBrowserRouter([
                 {
                   path: "myprofile",
                   element: <MyProfile />
+                },
+                {
+                  path: "paymentsuccess",
+                  element: <PaymentSuccess />,
+                },
+                {
+                  path: "paymentcancel",
+                  element: <PaymentCanceled />,
+                },
+                {
+                  path: "mybookings",
+                  element: <MyBookings />
                 }
               ]
         }

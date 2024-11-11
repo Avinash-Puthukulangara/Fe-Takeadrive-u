@@ -5,7 +5,6 @@ import { axiosInstance } from '../../config/axiosInstance'
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { SearchContext } from '../../components/user/SearchContext';
-import Cookies from 'js-cookie';
 
 export const Loginpage = () => {
     const [passwordVisible, setPasswordVisible] = useState(false)
@@ -39,9 +38,6 @@ export const Loginpage = () => {
             });
 
             console.log(response.data);
-            const token = response.data.token;
-            Cookies.set('token', token, { expires: 2 }); 
-            console.log(token)
 
             toast.success("Logged in successfully")
             setCars([])

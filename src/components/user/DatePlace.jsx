@@ -89,11 +89,18 @@ export const DatePlace = ({  }) => {
       });
 
       const carsData = response.data.allCarsdata;
-      console.log(carsData)
-      setCars(carsData)
+      setCars(carsData);
       localStorage.setItem('cars', JSON.stringify(carsData));
+      localStorage.setItem(
+        'bookingDetails',
+        JSON.stringify({
+          startdate: pickupDate?.toISOString(),
+          enddate: dropoffDate?.toISOString(),
+          pickuplocation: selectedPickup,
+          dropofflocation: selectedDropoff,
+        })
+      );
       setShowSearch(false);
-      
       navigate("/user/carlist");
 
     } catch (error) {
